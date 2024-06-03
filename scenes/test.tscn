@@ -1,0 +1,53 @@
+[gd_scene load_steps=10 format=3 uid="uid://bhnyw06sep3wd"]
+
+[ext_resource type="PackedScene" uid="uid://cfci77xnqx6t1" path="res://scenes/player.tscn" id="1_ingwd"]
+[ext_resource type="Texture2D" uid="uid://cwshww7uly3a7" path="res://assets/weapons/DBShotgunText.png" id="2_jigku"]
+[ext_resource type="ArrayMesh" uid="uid://xkai0ldvb73n" path="res://assets/weapons/DBSawedOffShotgun.obj" id="3_vr74q"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_s85om"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_esg8q"]
+sky_material = SubResource("ProceduralSkyMaterial_s85om")
+
+[sub_resource type="Environment" id="Environment_1dsbj"]
+background_mode = 2
+sky = SubResource("Sky_esg8q")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_t76ub"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_owr0d"]
+size = Vector3(5.12671, 0.248047, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5wpcd"]
+albedo_texture = ExtResource("2_jigku")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1dsbj")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.319886, 0.702916, -2.51451)
+mesh = SubResource("BoxMesh_t76ub")
+
+[node name="Player" parent="." instance=ExtResource("1_ingwd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.149969, 0.108648, -0.145898)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.310181, -0.375977, -0.0350037)
+shape = SubResource("BoxShape3D_owr0d")
+
+[node name="DbSawedOffShotgun" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.401248, 0, -1.47251)
+material_override = SubResource("StandardMaterial3D_5wpcd")
+mesh = ExtResource("3_vr74q")

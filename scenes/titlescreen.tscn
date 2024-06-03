@@ -1,0 +1,120 @@
+[gd_scene load_steps=9 format=3 uid="uid://c63gvdn26ekr"]
+
+[ext_resource type="PackedScene" uid="uid://bna3o3r72ume7" path="res://assets/train_1/scene.gltf" id="1_up30b"]
+[ext_resource type="Script" path="res://scripts/tscr_lights.gd" id="2_irexb"]
+[ext_resource type="Script" path="res://scripts/CanvasLayer.gd" id="3_w0pi3"]
+[ext_resource type="FontFile" uid="uid://bwlxh4t4fhyd3" path="res://assets/bullpen hv.otf" id="4_6ihdj"]
+[ext_resource type="Texture2D" uid="uid://prjao4ds0rlv" path="res://assets/quake/kmetr_64h.jpg" id="5_ctl06"]
+[ext_resource type="Script" path="res://scripts/b_exit.gd" id="6_m58oe"]
+[ext_resource type="Script" path="res://scripts/b_play.gd" id="6_uvu4o"]
+
+[sub_resource type="Environment" id="Environment_2xmo3"]
+ambient_light_source = 3
+ambient_light_color = Color(1, 1, 0.835294, 1)
+ambient_light_energy = 0.85
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.393942, 0, -0.919135, 0, 1, 0, 0.919135, 0, -0.393942, 0, 0.938735, 0.123973)
+fov = 62.2
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("1_up30b")]
+transform = Transform3D(4.985, 0, 0, 0, 4.985, 0, 0, 0, 4.985, 0.0402874, 0, 0.0855434)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_2xmo3")
+
+[node name="inside_light" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2857, 1.38649, 0.0453427)
+light_color = Color(0.568093, 0.472633, 0.272285, 1)
+
+[node name="inside_light2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3298, 1.38649, 0.0453427)
+light_color = Color(0.568093, 0.472633, 0.272285, 1)
+
+[node name="outside_light_r" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.40699, 1.084, 1.338)
+light_color = Color(1, 1, 0.827451, 1)
+light_energy = 0.543
+light_volumetric_fog_energy = 16.0
+script = ExtResource("2_irexb")
+
+[node name="outside_light_l" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.40699, 1.084, -1.00953)
+light_color = Color(1, 1, 0.827451, 1)
+light_energy = 0.543
+light_volumetric_fog_energy = 16.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("3_w0pi3")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -219.0
+offset_top = -241.44
+offset_right = 219.0
+offset_bottom = -156.44
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Kmetr64h" type="Sprite2D" parent="CanvasLayer/HBoxContainer"]
+texture_filter = 1
+position = Vector2(98, 45.5)
+scale = Vector2(3.70313, 1.875)
+texture = ExtResource("5_ctl06")
+
+[node name="Kmetr64h2" type="Sprite2D" parent="CanvasLayer/HBoxContainer"]
+texture_filter = 1
+position = Vector2(107, 45.5)
+scale = Vector2(3.70313, 1.875)
+texture = ExtResource("5_ctl06")
+offset = Vector2(60, 0)
+
+[node name="Label" type="Label" parent="CanvasLayer/HBoxContainer"]
+texture_filter = 2
+layout_mode = 2
+theme_override_colors/font_color = Color(0.779498, 0.478188, 0, 1)
+theme_override_fonts/font = ExtResource("4_6ihdj")
+theme_override_font_sizes/font_size = 70
+text = "INDUSTRIAL"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -239.0
+offset_top = -121.0
+offset_right = 228.0
+offset_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="b_play" type="Button" parent="CanvasLayer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("4_6ihdj")
+theme_override_font_sizes/font_size = 30
+text = "PLAY"
+script = ExtResource("6_uvu4o")
+
+[node name="b_exit" type="Button" parent="CanvasLayer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("4_6ihdj")
+theme_override_font_sizes/font_size = 30
+text = "EXIT"
+script = ExtResource("6_m58oe")

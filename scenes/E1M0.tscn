@@ -1,0 +1,66 @@
+[gd_scene load_steps=13 format=3 uid="uid://byoilxbcnhk2e"]
+
+[ext_resource type="PackedScene" uid="uid://cfci77xnqx6t1" path="res://scenes/player.tscn" id="1_uq8vm"]
+[ext_resource type="Texture2D" uid="uid://dp2ey6bc6xp" path="res://assets/quake/kgr0_r.jpg" id="2_1utyn"]
+[ext_resource type="ArrayMesh" uid="uid://dsaeult8avlj5" path="res://assets/pipe1.obj" id="3_uhrtb"]
+[ext_resource type="Texture2D" uid="uid://dmjb87qw7ls6l" path="res://assets/quake/#scuzzy.jpg" id="4_xi6sn"]
+[ext_resource type="Texture2D" uid="uid://cd0uni7ke5g6a" path="res://assets/quake/ktrim2_0.jpg" id="5_bc75x"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cq4ql"]
+albedo_texture = ExtResource("2_1utyn")
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oh2ei"]
+albedo_texture = ExtResource("4_xi6sn")
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_2gell"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_slb8u"]
+albedo_texture = ExtResource("5_bc75x")
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_8phpi"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_es2ql"]
+size = Vector3(1.89072, 1, 1.57959)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_xrpak"]
+
+[node name="E1m0" type="Node3D"]
+
+[node name="Player" parent="." instance=ExtResource("1_uq8vm")]
+transform = Transform3D(0.044404, 0, 0.999014, 0, 1, 0, -0.999014, 0, 0.044404, 3.51348, 1.91565, 0.739382)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+
+[node name="Pipe1" type="MeshInstance3D" parent="."]
+transform = Transform3D(-8.74228e-08, 12.98, 0, -2, -5.67374e-07, 0, 0, 0, 2, -2.493, 2.715, 1.068)
+material_override = SubResource("StandardMaterial3D_cq4ql")
+mesh = ExtResource("3_uhrtb")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(12.855, 0, 0, 0, 1, 0, 0, 0, 1.205, -2.21652, 1.09448, 1.09836)
+material_override = SubResource("StandardMaterial3D_oh2ei")
+mesh = SubResource("PlaneMesh_2gell")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(-9.6321e-08, -1.16227, 0, 2.20357, -5.08045e-08, 0, 0, 0, 2.39812, 10.4116, 2.86766, 1.09845)
+material_override = SubResource("StandardMaterial3D_slb8u")
+mesh = SubResource("PlaneMesh_8phpi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D3"]
+transform = Transform3D(1, -3.55271e-15, 0, 2.13163e-14, 1, 0, 0, 0, 1, -0.116714, 0, -0.0148926)
+shape = SubResource("BoxShape3D_es2ql")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.16815, 1.0353)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(13.965, 0, 0, 0, 0.1, 0, 0, 0, 4.025, 5.17303, 1.91427, 0.95541)
+shape = SubResource("WorldBoundaryShape3D_xrpak")

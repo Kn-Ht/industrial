@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://cfci77xnqx6t1"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_fdl5o"]
+[ext_resource type="ArrayMesh" uid="uid://dvxlxivwbb24x" path="res://assets/homer.obj" id="1_w25s5"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_y7ge4"]
+size = Vector3(0.395508, 0.815002, 0.30127)
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_fdl5o")
+
+[node name="view" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.48172, 0)
+fov = 91.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.992937, -0.0220665, -0.0545459, -0.0220394, 0.994434, -0.00109951, 0.0545569, 0.000111003, -0.993182, 0.559555, -0.332193, 0.559745)
+visible = false
+mesh = ExtResource("1_w25s5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00537258, 0.351944, -0.0746934)
+shape = SubResource("BoxShape3D_y7ge4")
